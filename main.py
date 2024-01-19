@@ -15,7 +15,7 @@ cursor = db.cursor()
 
 
 # НАчальный код для работы с ботом
-bot = telebot.TeleBot("6786465313:AAGWvU4ppWSAmP37BKEXVfW63hKWqycjzQk")
+bot = telebot.TeleBot("TOKEN")
 
 @bot.message_handler(commands=['start'])
 def start_message(message):
