@@ -8,12 +8,11 @@ from authentificator import *
 import MySQLdb
 
 # подключение к базе данных
-
+db = MySQLdb.connect(host="127.0.0.1", user="bot", passwd="090807Dan4ik", db="tgbot")
 
 
 # НАчальный код для работы с ботом
-bot = telebot.TeleBot("TOKEN")
-
+bot = telebot.TeleBot("6786465313:AAGWvU4ppWSAmP37BKEXVfW63hKWqycjzQk")
 
 # Стартовое сообщение
 @bot.message_handler(commands=['start'])
@@ -24,11 +23,6 @@ def start_message(message):
 @bot.message_handler(commands=['help'])
 def help_message(message):
     send_help_message(bot, message)
-
-# Логин в бота
-@bot.message_handler(commands=['login'])
-def login(message):
-    login(bot, message)
 
 # Лицензия
 @bot.message_handler(commands=['license'])
