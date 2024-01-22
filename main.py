@@ -5,11 +5,6 @@ import requests
 from message import *
 from license import *
 from authentificator import *
-import MySQLdb
-
-# подключение к базе данных
-db = MySQLdb.connect(host="127.0.0.1", user="bot", passwd="090807Dan4ik", db="tgbot")
-
 
 # НАчальный код для работы с ботом
 bot = telebot.TeleBot("6786465313:AAGWvU4ppWSAmP37BKEXVfW63hKWqycjzQk")
