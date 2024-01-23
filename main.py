@@ -5,18 +5,29 @@ import requests
 from message import *
 from license import *
 from authentificator import *
-import MySQLdb
+import mysql.connector
 
 # подключение к базе данных
-db = MySQLdb.connect(host="172.18.0.2", user="root", passwd="090807", db="bottg")
+db = mysql.connector.connect(
+    host="172.18.0.2",
+    user="root",
+    password="090807",
+    database="bottg"
+)
 cursor = db.cursor()
 
-#проверяем подключение к базе данных\
+# проверяем подключение к базе данных
 try:
     cursor.execute("SELECT * FROM users")
     db.commit()
-except:
-    pass
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    else:
+        print(err)
+
 
 # НАчальный код для работы с ботом
 bot = telebot.TeleBot("6786465313:AAGWvU4ppWSAmP37BKEXVfW63hKWqycjzQk")
