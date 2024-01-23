@@ -1,4 +1,9 @@
 version: '2'
 services:
-  93532d5ccc7b:
-    image: 'sha256:93532d5ccc7bd237806daca3a4275c5683f56556c85318f670896035775e7fac'
+  container1:
+    image: 'bottg:latest'
+    environment: []
+  56b21e040954:
+    image: 'sha256:56b21e040954f63d922725c2d049cf2a0dfbad5522e8d3e14c36f1823ab3f5e5'
+    environment:
+      - MYSQL_ROOT_PASSWORD=090807
