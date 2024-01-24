@@ -6,10 +6,12 @@ from message import *
 from license import *
 from authentificator import *
 import mysql.connector
+from mysql.connector import errorcode
+
 
 # подключение к базе данных
 db = mysql.connector.connect(
-    host="172.18.0.2",
+    host="172.17.0.2",
     user="root",
     password="090807",
     database="bottg"
@@ -28,7 +30,7 @@ except mysql.connector.Error as err:
     else:
         print(err)
 
-
+user_id = 0
 # НАчальный код для работы с ботом
 bot = telebot.TeleBot("6786465313:AAGWvU4ppWSAmP37BKEXVfW63hKWqycjzQk")
 
@@ -54,7 +56,12 @@ def callback_query(call):
             login(bot, call.message)
         elif call.data =='register':
             register(bot, call.message)
+        elif call.data =='regbot':
+            register(bot, call.message)
+        elif call.data == 'noregister':
+            no_register(bot, call.message)
     except:
         pass
+
 
 bot.polling()
