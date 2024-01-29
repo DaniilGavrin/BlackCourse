@@ -43,7 +43,7 @@ class Bot:
     def register_handlers(self):
         message_handler = MessageHandler()
         license_handler = LicenseHandler()
-        authentificator = Authentificator()
+        authentificator = Authentificator()  # Добавить инициализацию объекта authentificator
 
         @self.bot.message_handler(commands=['start'])
         def start_message(message):
@@ -51,7 +51,7 @@ class Bot:
 
         @self.bot.message_handler(commands=['help'])
         def help_message(message):
-            messsage_handler.send_help_message(self.bot, message)
+            message_handler.send_help_message(self.bot, message)
 
         @self.bot.message_handler(commands=['license'])
         def give_license(message):
@@ -60,8 +60,10 @@ class Bot:
         @self.bot.callback_query_handler(func=lambda call: True)
         def callback_query(call):
             try:
-                if call.data == "authentificator":
-                    authentificator.authentificator(self.bot, call)
+                if call.data == "login":
+                    authentificator.login(self.bot, call.message)
+                elif call.data == "register":
+                    authentificator.register(self.bot, call.message)
                 elif call.data == "license":
                     license_handler.license(self.bot, call)
                 elif call.data == "message":
