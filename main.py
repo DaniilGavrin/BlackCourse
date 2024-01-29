@@ -64,6 +64,8 @@ class Bot:
                     authentificator.login(self.bot, call.message)
                 elif call.data == "register":
                     authentificator.register(self.bot, call.message)
+                elif call.data == "no_register":
+                    authentificator.no_register(self.bot, call.message)
                 elif call.data == "license":
                     license_handler.license(self.bot, call)
                 elif call.data == "message":
