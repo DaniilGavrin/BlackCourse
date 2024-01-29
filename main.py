@@ -60,17 +60,15 @@ class Bot:
         @self.bot.callback_query_handler(func=lambda call: True)
         def callback_query(call):
             try:
-                if call.data == 'login':
-                    authentificator.login(bot, call.message)
-                elif call.data =='register':
-                    authentificator.register(bot, call.message)
-                elif call.data =='regbot':
-                    authentificator.register(bot, call.message)
-                elif call.data == 'noregister':
-                    message_handler.no_register(bot, call.message)
-            except:
-                self.bot.send_message(call.message.chat.id, "Ошибка")
-
+                if call.data == "authentificator":
+                    authentificator.authentificator(self.bot, call)
+                elif call.data == "license":
+                    license_handler.license(self.bot, call)
+                elif call.data == "message":
+                    message_handler.message(self.bot, call)
+            except Exception as e:
+                print(e)
+            
 
 # Создаем экземпляр класса Bot
 bot = Bot()
