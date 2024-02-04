@@ -19,12 +19,12 @@ class Authentificator:
         bot.register_next_step_handler(login, lambda message: self.get_login(bot, message))
 
     def get_login(self, bot, message):
-        # код авторизации
         login = message.text
         print(login)
         self.cursor.execute("SELECT * FROM users WHERE login = %s", (login,))
-        result = self.cursor.fetchone()
-        if result is None:
+        self.result = self.cursor.fetchone()
+        print(self.result)
+        if self.result == 0:
             bot.send_message(message.chat.id, "Такого пользователя не существует!")
             log_mark = types.InlineKeyboardMarkup(row_width=2)
             register = types.InlineKeyboardButton(text='Зарегистрироваться', callback_data='register')
@@ -32,7 +32,19 @@ class Authentificator:
             log_mark.add(register, no_reg)
             bot.send_message(message.chat.id, "Хотите зарегистрироваться?", reply_markup=log_mark)
         else:
-            bot.send_message(message.chat.id, "Введите пароль!")
+            login_pass = bot.send_message(message.chat.id, "Введите пароль!")
+            bot.register_next_step_handler(login_pass, lambda message: self.login_pass_check(bot, message))
+
+
+    def login_pass_check(self, bot, message):
+        self.login_pass_user = message.text
+        bot.send_message(message.chat.id, self.login_pass_user)
+        # проверяем пароль пользователя
+        hashed_password = bcrypt.hashpw(self.login_pass_user.encode('utf-8'), bcrypt.gensalt())
+        if self.result[2] == hashed_password:
+            print(1)
+        else:
+            bot.send_message(message.chat.id, "Неверный пароль!")
 
     def register(self, bot, message):
         # код регистрации
