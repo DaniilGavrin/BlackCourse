@@ -1,4 +1,4 @@
-from telebot import types
+
 from authentificator import *
 
 class MessageHandler:

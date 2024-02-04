@@ -1,6 +1,4 @@
 # Импортируем telebot + requests
-import telebot
-from telebot import *
 import requests
 from message import *
 from license import *
